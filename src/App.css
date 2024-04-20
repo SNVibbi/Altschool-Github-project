@@ -1,0 +1,36 @@
+.header {
+    background-color: #24292e;
+    padding: 10px 20px;
+    color: white;
+    display: flex;
+    align-items: center;
+  }
+  
+  .github-logo {
+    height: 40px;
+    margin-right: 15px;
+  }
+  
+  .title {
+    font-size: 24px;
+  }
+  
+  .profile {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f5f5f5;
+  }
+  
+  .my-photo {
+    height: 100px;
+    border-radius: 50%;
+    margin-right: 20px;
+  }
+  
+  .statement {
+    font-size: 16px;
+    color: #333;
+  }
+  
