@@ -18,7 +18,7 @@ const api = axios.create({
   }
 });
 
-console.log("GitHub Token:", import.meta.env.VITE_GITHUB_TOKEN);
+// console.log("GitHub Token:", import.meta.env.VITE_GITHUB_TOKEN);
 
 function App() {
   const [modalOpen, setModalOpen] = useState(false);
