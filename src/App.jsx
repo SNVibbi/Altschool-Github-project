@@ -8,7 +8,7 @@ import RepoList from './components/RepoList.jsx';
 import NotFound from './components/NotFoundPage.jsx';
 import RepoModal from './components/RepoModal.jsx';
 import axios from 'axios';
-import './index.css';
+
 
 
 const api = axios.create({
@@ -40,12 +40,15 @@ function App() {
     }
   };
 
-const handleDeleteRepo = async (repoId) => {
+const handleDeleteRepo = async (repoName) => {
   try {
-    const response = await api.delete(`/repos/SNVibbi/${repoName}`);
-    console.log('Deleted successfully', response.data)
+    const response = await axios.delete(`https://api.github.com/repos/SNVibbi/${repoName}`, {
+      headers: { Authorization: `token ${import.meta.env.VITE_GITHUB_TOKEN}` }
+    });
+    console.log('Deleted successfully', response.data);
   } catch (error) {
-    console.error('Error:', error.response.data);
+    console.error('Error URL:', `https://api.github.com/repos/SNVibbi/${repoName}`);
+    console.error('Error response:', error.response);
   }
 };
 
@@ -59,14 +62,14 @@ return (
       {modalOpen && 
       <RepoModal 
       isOpen={modalOpen} 
-      onclose={() => setModalOpen(false)} 
+      onClose={() => setModalOpen(false)} 
       onSubmit={handleCreateOrUpdateRepo} />}
       <Routes>
         <Route path="/" element={<RepoList setRepoDetails={setRepoDetails} handleDeleteRepo={handleDeleteRepo} />} />
         <Route path="/repo/:name" element={<RepoDetailsComponent />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-      <RepoModal isopen={modalOpen} onclose={() => setModalOpen(false)} onSubmit={handleCreateOrUpdateRepo} initialData={repoDetails || {}} />
+      <RepoModal isOpen={modalOpen} onClose={() => setModalOpen(false)} onSubmit={handleCreateOrUpdateRepo} initialData={repoDetails || {}} />
     </div>
   </Router>
 );

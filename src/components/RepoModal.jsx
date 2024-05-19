@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import PropTypes from 'prop-types'
 
 function RepoModal({ isOpen, onClose, onSubmit, initialData = {} })  {
     const [repoData, setRepoData] = useState({
@@ -6,8 +7,15 @@ function RepoModal({ isOpen, onClose, onSubmit, initialData = {} })  {
         description: initialData.description || '',
     });
 
+    useEffect(() => {
+        setRepoData({
+            name: initialData.name || '',
+            description: initialData.description || ''
+        });
+    }, [initialData]);
+
     const handleChange = (e) => {
-        setRepoData({ ...repoData, [e.target.name]: e.target.value });
+        setRepoData(prev => ({ ...prev, [e.target.name]: e.target.value }));
     };
 
     const handleSubmit = (e) => {
@@ -56,6 +64,16 @@ function RepoModal({ isOpen, onClose, onSubmit, initialData = {} })  {
     );
 
 }
+
+RepoModal.protoType = {
+    isOpen: PropTypes.bool.isRequired,
+    onClose: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired,
+    initialData: PropTypes.shape({
+        name: PropTypes.string,
+        description: PropTypes.string
+    })
+};
 
 
 export default RepoModal;
