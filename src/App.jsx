@@ -33,7 +33,7 @@ function App() {
         name: repoData.name,
         description: repoData.description,
       });
-      console.log('Success:', response.data)
+      // console.log('Success:', response.data)
       setModalOpen(false);
     } catch (error) {
       console.error('Error:', error.response.data);
@@ -45,7 +45,7 @@ const handleDeleteRepo = async (repoName) => {
     const response = await axios.delete(`https://api.github.com/repos/SNVibbi/${repoName}`, {
       headers: { Authorization: `token ${import.meta.env.VITE_GITHUB_TOKEN}` }
     });
-    console.log('Deleted successfully', response.data);
+    // console.log('Deleted successfully', response.data);
   } catch (error) {
     console.error('Error URL:', `https://api.github.com/repos/SNVibbi/${repoName}`);
     console.error('Error response:', error.response);
